@@ -101,7 +101,14 @@ public class ServiceManager {
         Log.i(TAG, String.format("version %s (%d)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
 
         Log.i(TAG, "fix sqlite global crash for oneplus 9 pro ...");
-        Class.forName("android.database.sqlite.SQLiteGlobal").getDeclaredField("sDefaultSyncMode").set(null, "FULL");
+        try
+        {
+            Class.forName("android.database.sqlite.SQLiteGlobal").getDeclaredField("sDefaultSyncMode").set(null, "FULL");
+        }
+        catch (Throwable e)
+        {
+            Log.e(TAG, "fix oneplus 9 pro failed", e);
+        }
 
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
             Log.e(TAG, "Uncaught exception", e);
