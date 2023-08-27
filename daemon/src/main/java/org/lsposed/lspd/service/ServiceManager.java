@@ -28,7 +28,7 @@ import android.os.IServiceManager;
 import android.os.Looper;
 import android.os.Process;
 import android.util.Log;
-import android.database.sqlite.SQLiteGlobal;
+import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.RequiresApi;
 
@@ -101,7 +101,7 @@ public class ServiceManager {
         Log.i(TAG, String.format("version %s (%d)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
 
         Log.i(TAG, "fix sqlite global crash for oneplus 9 pro ...");
-        SQLiteGlobal.sDefaultSyncMode = SQLiteGlobal.SYNC_MODE_FULL;
+        Class.forName("android.database.sqlite.SQLiteGlobal").getDeclaredField("sDefaultSyncMode").set(null, "FULL");
 
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
             Log.e(TAG, "Uncaught exception", e);
