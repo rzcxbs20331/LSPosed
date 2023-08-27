@@ -28,7 +28,7 @@ import android.os.IServiceManager;
 import android.os.Looper;
 import android.os.Process;
 import android.util.Log;
-import android.database.sqlite;
+import android.database.sqlite.SQLiteGlobal;
 
 import androidx.annotation.RequiresApi;
 
